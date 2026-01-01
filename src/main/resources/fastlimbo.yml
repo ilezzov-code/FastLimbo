@@ -1,0 +1,184 @@
+# ███████╗░█████╗░░██████╗████████╗██╗░░░░░██╗███╗░░░███╗██████╗░░█████╗░
+# ██╔════╝██╔══██╗██╔════╝╚══██╔══╝██║░░░░░██║████╗░████║██╔══██╗██╔══██╗
+# █████╗░░███████║╚█████╗░░░░██║░░░██║░░░░░██║██╔████╔██║██████╦╝██║░░██║
+# ██╔══╝░░██╔══██║░╚═══██╗░░░██║░░░██║░░░░░██║██║╚██╔╝██║██╔══██╗██║░░██║
+# ██║░░░░░██║░░██║██████╔╝░░░██║░░░███████╗██║██║░╚═╝░██║██████╦╝╚█████╔╝
+# ╚═╝░░░░░╚═╝░░╚═╝╚═════╝░░░░╚═╝░░░╚══════╝╚═╝╚═╝░░░░░╚═╝╚═════╝░░╚════╝░
+
+# Socials / Ссылки:
+# • Contact with me / Связаться: https://t.me/ilezovofficial
+# • Telegram Channel / Телеграм канал: https://t.me/fastlimbo
+# • GitHub: https://github.com/ilezzov-code
+
+# By me coffee / Поддержать разработчика:
+# • YooMoney: https://yoomoney.ru/to/4100118180919675
+# • Telegram Gift: https://t.me/ilezovofficial
+# • TON: UQCInXoHOJAlMpZ-8GIHqv1k0dg2E4pglKAIxOf3ia5xHmKV
+# • BTC: 1KCM1QN9TNYRevvQD63UF81oBRSK67vCon
+# • Card: 2200 7007 3348 7101 (T-Bank)
+
+# Check for updates / Проверять наличие обновлений
+check-updates: true
+
+# Server address and port to bind the Limbo server
+# Адрес и порт Limbo сервера, который будет доступен для подключения
+bind: "0.0.0.0:25565"
+
+# Maximum number of players allowed to connect simultaneously
+# Set to -1 for unlimited capacity
+# Максимальное количество игроков, которые могут подключиться одновременно
+# Установите -1, чтобы сделать это количество бесконечным
+max-players: 100
+
+# Server representation in the multiplayer server list (MOTD & Version)
+# Описание сервера в серверном листе (MOTD и версия)
+ping:
+  # Message Of The Day: the text shown under the server name
+  # Текст, отображаемый под названием сервера
+  motd: "LimboServer"
+
+  # Version string shown in the top right corner of the server entry
+  # Строка версии, отображаемая в правом верхнем углу списка серверов
+  version: "LimboServer"
+
+  # List of Minecraft versions supported by the server for protocol handshaking
+  # Список версий Minecraft, поддерживаемых сервером для протокольного взаимодействия
+  support-version:
+    - 1.21
+    - 1.20
+
+# World type sent to the client. Influences lighting and skybox
+# Available: OVERWORLD, NETHER, THE_END
+# Измерение, отправляемое клиенту. Влияет на освещение и небо
+# Доступные: OVERWORLD (Верхний мир), NETHER (Ад), THE_END (Энд)
+dimension: OVERWORLD
+
+# The name of the world folder (sent in the Join Game packet)
+# Название мира (отправляется в пакете входа)
+world-name: limbo
+
+# Setting up the player's location / Настройка локации игрока
+spawn:
+  x: 0.0
+  y: 64.0
+  z: 0.0
+  yaw: 0.0
+  pitch: 0.0
+
+# Weather state
+# Состояние погоды
+# Values / Значения: CLEAR (Ясно), RAIN (Дождь), THUNDER (Гроза)
+weather: CLEAR
+
+# Default game mode / Игровой режим игрока
+# Values / Значения: SURVIVAL, CREATIVE, SPECTATOR, ADVENTURE
+gamemode: SPECTATOR
+
+# In-game player list (Tab) visibility settings
+# Настройки видимости списка игроков (Tab) внутри игры
+player-list:
+  # Whether to show players in the Tab list
+  # Включить ли отображение игроков в списке Tab
+  enable: false
+  # Static username to display if player list is enabled
+  # Статичное имя пользователя для отображения, если список включен
+  username: "FastLimbo"
+
+# Header and Footer text for the Tab list
+# Текст в верхней и нижней части списка Tab
+tab-list:
+  enable: false
+  header: "FastLimbo"
+  footer: "Welcome to the server"
+
+# Brand name sent in the plugin message channel (displayed in F3 menu)
+# Название сервера, отправляемое в канале плагинов (отображается в меню F3)
+server-name:
+  enable: true
+  content: "FastLimbo"
+
+# Actions triggered when a player successfully joins the server
+# Действия, выполняемые при успешном входе игрока на сервер
+player-join:
+  # Automatic message sent to the player's chat
+  # Автоматическое сообщение, отправляемое в чат игроку
+  chat-message:
+    enable: true
+    text: "Welcome to the Limbo"
+
+  # On-screen Title message settings
+  # Настройки сообщения-заголовка на весь экран
+  title:
+    enable: true
+    # Duration of the fade-in effect (seconds)
+    # Длительность появления текста (в секундах)
+    fade-in: 1
+    # Duration of the fade-out effect (seconds)
+    # Длительность исчезновения текста (в секундах)
+    fade-out: 1
+    # Duration the title stays fully opaque (seconds)
+    # Время удержания текста на экране (в секундах)
+    stay: 5
+
+  # Sound effect played to the player upon joining
+  # Звуковой эффект, проигрываемый игроку при входе
+  sound:
+    enable: true
+    sound: ENTITY_EXPERIENCE_ORB_PICKUP
+
+# Boss bar UI element settings at the top of the screen
+# Настройки полоски босса (Boss Bar) в верхней части экрана
+boss-bar:
+  # Displayed text above the bar
+  # Отображаемый текст над полоской
+  text: "Welcome to the limbo"
+  # Fill level of the bar (0.0 to 1.0)
+  # Уровень заполнения полоски (от 0.0 до 1.0)
+  progress: 1.0
+  # Color of the boss bar
+  # Цвет полоски босса
+  # Colors / Цвета: PINK, BLUE, RED, GREEN, YELLOW, PURPLE, WHITE
+  color: YELLOW
+  # Visual pattern of the bar (e.g., solid or segmented)
+  # Визуальный стиль полоски (например, сплошная или разделенная)
+  # Support overlays / Поддерживаемые стили: PROGRESS, NOTCHED_6, NOTCHED_10, NOTCHED_12, NOTCHED_20
+  overlay: PROGRESS
+
+# Action bar text displayed above the health/hunger bars
+# Текст экшн-бара, отображаемый над полосками здоровья и голода
+action-bar:
+  text: "Welcome to the limbo server"
+  # Keeps the action bar text visible indefinitely
+  # Удерживает текст экшн-бара видимым постоянно
+  lock: true
+
+# Player data forwarding from proxies (Velocity/BungeeCord)
+# Support for IP, UUID, and Skin transmission
+# Проброс данных игрока с прокси (Velocity/BungeeCord)
+# Поддержка передачи IP, UUID и скинов
+info-forwarding:
+  # Types: NONE, LEGACY (Bungee), MODERN (Velocity), BUNGEE_GUARD
+  # Типы: NONE, LEGACY, MODERN, BUNGEE_GUARD
+  type: NONE
+  # Secret key for MODERN (Velocity) forwarding
+  # Секретный ключ для MODERN проброса (Velocity)
+  secret: '<YOUR_SECRET_HERE>'
+  # Security tokens for BungeeGuard integration
+  # Токены безопасности для интеграции с BungeeGuard
+  tokens:
+    - '<BUNGEE_GUARD_TOKEN>'
+
+# Netty networking engine performance tuning
+# Настройка производительности сетевого движка Netty
+netty:
+  threads:
+    # Handles incoming connection acceptance
+    # Отвечает за прием входящих соединений
+    boss-group: 1
+    # Handles read/write operations for established connections
+    # Отвечает за чтение/запись данных установленных соединений
+    worker-group: 4
+
+# Internal configuration version. Do not modify!
+# Внутренняя версия конфигурации. Не редактируйте!
+config-version: 1.0
