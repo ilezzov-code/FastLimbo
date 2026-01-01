@@ -1,0 +1,15 @@
+{
+  "latest": {
+    "version": "1.0.0",
+    "version_code": 100,
+    "release_date": "",
+    "min_java_version": 17,
+    "severity": "HIGH"
+  },
+  "urls": {
+    "download": "",
+    "contact": "https://t.me/ilezovofficial"
+  },
+  "changelog": "The first version",
+  "inherit": true
+}
