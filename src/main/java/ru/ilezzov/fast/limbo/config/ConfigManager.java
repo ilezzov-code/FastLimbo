@@ -41,7 +41,7 @@ import static ru.ilezzov.fast.limbo.logging.LoggerTemplate.*;
 
 public class ConfigManager {
     private static final Logger logger = LoggerFactory.getLogger(ConfigManager.class);
-    private static final String FILE_NAME = "fastlimbo.yml";
+    private static final String FILE_NAME = getProperties().getConfigurationFile();
     private static final ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
     private final Path configPath;

@@ -35,4 +35,12 @@ public class LoggerTemplate {
     public static void fileUpdated(final Logger logger, final String file) {
         logger.info("File '{}' has been updated and new parameters have been added", file);
     }
+
+    public static void propertiesLoad(final Logger logger) {
+        logger.info(".properties file has been loaded");
+    }
+
+    public static void propertiesErrorLoad(final Logger logger, final Exception e) {
+        logger.error("An error occurred when loading a .properties file", e);
+    }
 }

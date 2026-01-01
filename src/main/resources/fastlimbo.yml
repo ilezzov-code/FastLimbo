@@ -181,4 +181,4 @@ netty:
 
 # Internal configuration version. Do not modify!
 # Внутренняя версия конфигурации. Не редактируйте!
-config-version: 1.0
+config-version: ${project.version}
