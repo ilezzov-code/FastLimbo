@@ -36,11 +36,19 @@ public class LoggerTemplate {
         logger.info("File '{}' has been updated and new parameters have been added", file);
     }
 
-    public static void propertiesLoad(final Logger logger) {
+    public static void propertiesLoaded(final Logger logger) {
         logger.info(".properties file has been loaded");
     }
 
     public static void propertiesErrorLoad(final Logger logger, final Exception e) {
         logger.error("An error occurred when loading a .properties file", e);
+    }
+
+    public static void versionDateLoaded(final Logger logger) {
+        logger.info("VersionDate has been loaded");
+    }
+
+    public static void versionDateErrorLoad(final Logger logger, final Exception e) {
+        logger.error("An error occurred when loading a version date", e);
     }
 }
