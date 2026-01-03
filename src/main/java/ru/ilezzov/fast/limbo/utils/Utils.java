@@ -17,6 +17,7 @@ package ru.ilezzov.fast.limbo.utils;
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import ru.ilezzov.fast.limbo.logging.Lang;
 import ru.ilezzov.fast.limbo.model.Response;
 
 public class Utils {
@@ -40,7 +41,7 @@ public class Utils {
                 }
 
             } catch (final NumberFormatException e) {
-                return Response.error("Invalid config version format: a number was expected (e.g., 1.0.1), but a string was found", e);
+                return Response.error(Lang.INVALID_FORMAT_VERSION_ERROR, e);
             }
         }
         return Response.ok(0);

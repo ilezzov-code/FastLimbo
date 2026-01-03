@@ -19,15 +19,15 @@ package ru.ilezzov.fast.limbo.properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.ilezzov.fast.limbo.FastLimbo;
 import ru.ilezzov.fast.limbo.model.Response;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import static ru.ilezzov.fast.limbo.logging.LoggerTemplate.propertiesErrorLoad;
-import static ru.ilezzov.fast.limbo.logging.LoggerTemplate.propertiesLoad;
+import static ru.ilezzov.fast.limbo.FastLimbo.*;
+import static ru.ilezzov.fast.limbo.logging.Lang.*;
+
 
 public class MyProperties {
     private final Logger logger = LoggerFactory.getLogger(MyProperties.class);
@@ -41,11 +41,11 @@ public class MyProperties {
         final Response<Void> loadResponse = load();
 
         if (!loadResponse.success()) {
-            propertiesErrorLoad(logger, loadResponse.error());
-            FastLimbo.stop();
+            logger.error(loadResponse.message(), loadResponse.error());
+            stop();
         }
 
-        propertiesLoad(logger);
+        logger.info(FILE_LOADED.formatted(".properties"));
         loadValues();
     }
 
@@ -60,10 +60,9 @@ public class MyProperties {
     private Response<Void> load() {
         try (final InputStream in = MyProperties.class.getClassLoader().getResourceAsStream(".properties")) {
             properties.load(in);
-
             return Response.ok();
         } catch (final IOException e) {
-            return Response.error("Failed to load .properties", e);
+            return Response.error(IO_ERROR, e);
         }
     }
 

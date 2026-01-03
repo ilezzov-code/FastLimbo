@@ -1,26 +1,26 @@
 package ru.ilezzov.fast.limbo.version;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.sun.tools.javac.Main;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.ilezzov.fast.limbo.FastLimbo;
-import ru.ilezzov.fast.limbo.logging.LoggerTemplate;
 import ru.ilezzov.fast.limbo.model.Response;
 import ru.ilezzov.fast.limbo.utils.Utils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
+import java.net.ConnectException;
 import java.net.URI;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static ru.ilezzov.fast.limbo.FastLimbo.*;
-import static ru.ilezzov.fast.limbo.logging.LoggerTemplate.*;
+import static ru.ilezzov.fast.limbo.logging.Lang.*;
 
 /*
  * Copyright (C) 2024-2026 ILeZzoV
@@ -53,11 +53,17 @@ public class VersionManager {
         final Response<Void> loadResponse = load();
 
         if (!loadResponse.success()) {
-            versionDateErrorLoad(logger, loadResponse.error());
+            final Exception e = loadResponse.error();
+
+            if (e == null) {
+                logger.error(loadResponse.message());
+            } else {
+                logger.error(loadResponse.message(), loadResponse.error());
+            }
             return;
         }
 
-        versionDateLoaded(logger);
+        logger.info(VERSION_LOADED);
     }
 
     public Response<VersionType> check() {
@@ -104,7 +110,7 @@ public class VersionManager {
         return versionDate;
     }
 
-    private Response<Void> load(){
+    private Response<Void> load() {
         try {
             final URI uri = URI.create(VERSION_FILE_URL);
             final URL url = uri.toURL();
@@ -114,16 +120,25 @@ public class VersionManager {
                 String content = new String(bytes, StandardCharsets.UTF_8);
 
                 if (!content.trim().startsWith("{")) {
-                    return Response.error("This file is not JSON: " + content.substring(0, Math.min(20, content.length())));
+                    return Response.error(SYNTAX_ERROR.formatted("github returned non-json"));
                 }
 
                 this.versionDate = mapper.readValue(content, VersionDate.class);
                 return Response.ok();
-            } catch (final IOException e) {
-                return Response.error("", e);
             }
-        } catch (final IOException e) {
-            return Response.error("Failed to load Version", e);
+        } catch (final UnknownHostException e) {
+            return Response.error(NO_NETWORK_CONNECT_ERROR, e);
+        } catch (final ConnectException e) {
+            return Response.error(CONNECT_REJECTED_ERROR, e);
+        } catch (JsonMappingException | JsonParseException e) {
+            return Response.error(STRUCTURE_ERROR, e);
+        } catch (IOException e) {
+            if (e.getMessage().contains("404")) {
+                return Response.error(NOT_FOUND_ERROR, e);
+            }
+            return Response.error(IO_ERROR, e);
+        } catch (Exception e) {
+            return Response.error(CRITICAL_REQUEST_ERROR.formatted(e.getMessage()), e);
         }
     }
 }
